@@ -8,13 +8,21 @@ namespace LuckyNumbers
         {
             int low = 0;
             int high = 100;  
-            int jackpot = 1000000000;
+            int jackpot = 9450000;
             string response = "yes";
             do
             {
                 int i;
                 int[] userArray = new int[6];
-                Console.WriteLine("Welcome to Lucky Numbers!! \n\nThe current jackpot is $" + jackpot + "\n\n");
+                Console.WriteLine("Welcome to:");
+                Console.WriteLine("");
+                Console.WriteLine("         __                               __  __  __  ___");
+                Console.WriteLine("|   |  | |  |.' '. .'  |'.  | |  | |'..'| |_| |_  |_| |__");
+                Console.WriteLine("|__ |__| |_ |'.   |    |  '.| |__| |    | |_| |__ |'. __| \n");
+                Console.WriteLine("The current jackpot is $" + jackpot);
+                Console.WriteLine("\nGuess all 6 numbers correctly to win it all!!");
+                Console.WriteLine("\nPress any key to continue...");
+                Console.ReadLine();
                 Console.WriteLine("Please enter a lower bounds number.");
                 low = int.Parse(Console.ReadLine());
                 Console.WriteLine("Please enter a higher bounds number.");
@@ -37,30 +45,45 @@ namespace LuckyNumbers
                 }
 
                 
-                Console.WriteLine("\nLet's see how you did...\n");
+                Console.WriteLine("Let's see how you did...Press any key to see the winning numbers");
+                Console.ReadLine();
                 Console.WriteLine("The lucky numbers are:");
 
                 Random r = new Random();
                 int[] rArray = new int[6];
 
+                int j;
                 for (i = 0; i < rArray.Length; i++)
                 {
                     rArray[i] = r.Next(low, high + 1);
-                    Console.WriteLine("Lucky Number: " + rArray[i]);
+                    for (j = 0; j < rArray.Length; j++)
+
+
+                        if ((rArray[i] == rArray[j]) && (i != j))
+                    {
+                        i--;
+                        break;
+                    }
                 }
 
+                for (i = 0; i < rArray.Length; i++)
+                {
+                    Console.WriteLine("Lucky Number: " + rArray[i]);
+                }
+            
                 double correct = 0;
 
                 for (i = 0; i < rArray.Length; i++)
                 {
-                    if (rArray[i] == userArray[0] || rArray[i] == userArray[1] || rArray[i] == userArray[2] || rArray[i] == userArray[3] || rArray[i] == userArray[4] || rArray[i] == userArray[5] )
+                    for (j = 0; j < userArray.Length; j++)
+                    if (rArray[i] == userArray[j])
                     {
                         correct += 1;
                     }
 
                 }
 
-                Console.WriteLine("You got " + correct + " matches!");
+                Console.WriteLine("\nYou got " + correct + " matches!");
 
                 double reward;
                 reward = (jackpot * (correct / 6)); 
@@ -68,16 +91,17 @@ namespace LuckyNumbers
                 {
                     reward = 0;
                 }
-                
+                Console.WriteLine("\nCalculating your winnings...press any key to continue");
+                Console.ReadLine();
 
                 Console.WriteLine("\nCongratulations you just won $" + reward + "!!!!!!!!!!");
-                
-                Console.WriteLine("Would you like to play again?");
+                Console.WriteLine("\nPlease see Pete Fittante to collect your reward.");
+                Console.WriteLine("\nWould you like to play again?");
                 response = Console.ReadLine().ToLower();
             } while (response == "yes");
             if (response == "no")
             {
-                Console.WriteLine("Thanks for playing!");
+                Console.WriteLine("\n\t\t\tThanks for playing!");
                 return;
             }
             
