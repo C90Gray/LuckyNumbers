@@ -10,6 +10,7 @@ namespace LuckyNumbers
             int high = 100;  
             int jackpot = 9450000;
             string response = "yes";
+            //do while statement to loop the program
             do
             {
                 int i;
@@ -27,7 +28,7 @@ namespace LuckyNumbers
                 low = int.Parse(Console.ReadLine());
                 Console.WriteLine("Please enter a higher bounds number.");
                 high = int.Parse(Console.ReadLine());
-               
+               //making sure the input values are within the set range
                 for (i = 0; i < userArray.Length; i++)
                 {
                         Console.WriteLine("Please enter a number you think will match the winning numbers.");
@@ -39,6 +40,7 @@ namespace LuckyNumbers
                     }
                 }
                 Console.WriteLine("Thank you for your input. \n\nThe numbers you chose are:");
+                //displaying the user input array
                 for (i = 0; i < userArray.Length; i++)
                 {
                         Console.WriteLine(userArray[i]);
@@ -51,28 +53,26 @@ namespace LuckyNumbers
 
                 Random r = new Random();
                 int[] rArray = new int[6];
-
+                //generating random number array while making sure that no values repeat
                 int j;
                 for (i = 0; i < rArray.Length; i++)
                 {
                     rArray[i] = r.Next(low, high + 1);
                     for (j = 0; j < rArray.Length; j++)
-
-
-                        if ((rArray[i] == rArray[j]) && (i != j))
+                    if ((rArray[i] == rArray[j]) && (i != j))
                     {
                         i--;
                         break;
                     }
                 }
-
+                //displaying the random number array
                 for (i = 0; i < rArray.Length; i++)
                 {
                     Console.WriteLine("Lucky Number: " + rArray[i]);
                 }
             
                 double correct = 0;
-
+                //counting the number of  correct matches
                 for (i = 0; i < rArray.Length; i++)
                 {
                     for (j = 0; j < userArray.Length; j++)
@@ -84,7 +84,7 @@ namespace LuckyNumbers
                 }
 
                 Console.WriteLine("\nYou got " + correct + " matches!");
-
+                //calculating reward amount
                 double reward;
                 reward = (jackpot * (correct / 6)); 
                 if (correct == 0)
@@ -99,6 +99,8 @@ namespace LuckyNumbers
                 Console.WriteLine("\nWould you like to play again?");
                 response = Console.ReadLine().ToLower();
             } while (response == "yes");
+            //while statement to loop program
+            //if statement to end program
             if (response == "no")
             {
                 Console.WriteLine("\n\t\t\tThanks for playing!");
@@ -107,20 +109,6 @@ namespace LuckyNumbers
             
             
         }
-
-       
-
-                   
-              
-            
-
-            
-        
-        
-       
-        
-           
-       
 
     }
 }
